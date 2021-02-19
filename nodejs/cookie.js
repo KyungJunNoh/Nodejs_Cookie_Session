@@ -16,5 +16,5 @@ http.createServer(function (request, response) {
     'Set-Cookie': ['yummy_cookie=choco', 'tasty_cookie=strawberry']
   }); // F12에서 response header에서 확인가능
 
-  response.end('Cookie!!');
+  response.end('Cookie!!'); //페이지에 Cookie!!출력
 }).listen(3000);
