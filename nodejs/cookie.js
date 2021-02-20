@@ -13,8 +13,21 @@ http.createServer(function (request, response) {
   // console.log(cookies.tasty_cookie); //tasty_cookie 의 value값 출력
   
   response.writeHead(200, {  //쿠키생성
-    'Set-Cookie': ['yummy_cookie=choco', 'tasty_cookie=strawberry']
+    'Set-Cookie': [
+      'yummy_cookie=choco', 
+      'tasty_cookie=strawberry',
+      `Permanent=cookies; Max-Age =${60*60*24*30}`, //Max-Age : 현재 시점을 기준으로 언제까지 살아있을지 정하는 것, 단위 : 초
+      'Secure=Secure; Secure',
+      'HttpOnly=HttpOnly; HttpOnly', // 참고 : https://nsinc.tistory.com/121
+      'Path=Path; Path=/cookie', // /cookie가 붙은 디렉토리에서만 쿠키를 보이게 할수있다.
+      'Domain = Domain; Domain=o2.org'
+    ]
   }); // F12에서 response header에서 확인가능
 
   response.end('Cookie!!'); //페이지에 Cookie!!출력
 }).listen(3000);
+
+
+// Session cookies 와 Permanent cookies 차이점
+// Session cookies : 서버가 켜져있는동안만 지속되는 쿠키 (다시키면 사라져있는 쿠키)
+// Permanent cookies : 지속되는 쿠키 (다시켜도 지속되어 있는 쿠키)
